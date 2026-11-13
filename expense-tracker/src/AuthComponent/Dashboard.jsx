@@ -30,7 +30,7 @@ export default function DashBoard() {
                 </header>
 
                 <div className="flex w-full h-fit py-3 justify-around flex-wrap mt-5">
-                    <div className="w-[32%] relative bg-primary h-35 rounded-xl p-3 ">
+                    <div className="w-[32%] relative bg-blue-900 h-35 rounded-xl p-3 ">
                         <h4 className="text-muted font-semibold text-lg">Total Balance</h4>
                         <h2 className="text-text text-2xl font-bold mt-3">₦ 250,000</h2>
                         <p className="mt-3 text-accent font-medium"><i className="fa-solid fa-arrow-up rotate-40 text-accent "></i>  +12%</p>

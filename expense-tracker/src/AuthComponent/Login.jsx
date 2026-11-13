@@ -15,44 +15,54 @@ export default function Login({ setLogin }) {
 
     const [login, checkLogin] = useState(false)
 
+    const [iuser, setIuser] = useState("")
+
+    const [style, setStyle] = useState({})
+
     function viewpassword() {
         setShowpassword(prev => !prev)
     }
+    
+    
+ const olduser = JSON.parse(localStorage.getItem("user"));
+    console.log(olduser);
 
+   
     function modal() {
 
         return createPortal(
-            <div className="w-100 h-13 bg-accent absolute top-12 transition-top ease duration-300 flex items-center justify-center rounded-xl right-110 ">
-                <h3 className="text-text text-xl font-medium">Login Sucessful!</h3>
+            <div style={style} className="w-100 h-13 absolute top-12 transition-top ease duration-300 flex items-center justify-center rounded-xl right-110 ">
+                <h3 className=" text-xl font-medium">{iuser}</h3>
             </div>,
 
             document.body
         )
     }
 
- function handlechage() {
+    function handlechage() {
         setemailmessage(false)
         setpasswordmessage(false)
-    }   
-
+        setShowmodal(false)
+    }
 
     function handleLogin(e) {
         e.preventDefault();
-
-        const olduser = JSON.parse(localStorage.getItem("user"));
-        console.log(olduser);
-
-
 
         const formdata = new FormData(e.currentTarget)
 
         const form = Object.fromEntries(formdata)
 
+
         if (form.email.trim() !== olduser.email) {
-            setemailmessage(true);
+            setShowmodal(true)
+            setStyle({
+                backgroundColor: "#FCA5A5",
+                color: "#B91C1C"
+            })
+            setIuser("Account not found")
             return;
         } else {
-            setemailmessage(false);
+            setShowmodal(false);
         }
 
         if (form.password.trim() !== olduser.password) {
@@ -62,26 +72,34 @@ export default function Login({ setLogin }) {
             setpasswordmessage(false);
         }
 
-        if (olduser) {
-            setShowmodal(true)
 
+        if (olduser.email && olduser.password) {
+            setShowmodal(true)
+            setStyle({
+                backgroundColor: "#10C981",
+                color: "white"
+            })
+            setIuser("Login Sucessful")
             setTimeout(() => {
                 setShowmodal(false)
-            }, 5000)
+            }, 3000)
         }
 
+        setTimeout(()=>{
+
         checkLogin(true)
+        },3000)
 
     }
 
-    
-        if(login){
-            return <SideBar />
-        }
+
+    if (login) {
+        return <SideBar />
+    }
 
     return (
         <>
-            
+
             <section className="bg-background min-h-screen w-screen flex items-center py-4 px-3">
                 <div className="min-h-110 border-2 border-border w-120 rounded-2xl m-auto flex flex-col items-center py-4 px-2 bg-sidebar justify-center sm:px-6">
                     {showmodel && modal()}
@@ -98,7 +116,7 @@ export default function Login({ setLogin }) {
                             { display: "block" }
                         ) : (
                             { display: "none" }
-                        )}>{emailmessage && "Please enter a valid email address"}</small>
+                        )}>{emailmessage && "Account not found"}</small>
 
                         <div className="flex w-full border-border bg-surface h-13 mt-8 rounded-lg flex items-center justify-center gap-3 px-3 focus-within:border-border focus-within:border-2">
                             <i className="fa-solid fa-key text-muted text-2xl "></i>
