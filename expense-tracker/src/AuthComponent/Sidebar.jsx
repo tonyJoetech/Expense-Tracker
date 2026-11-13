@@ -3,66 +3,137 @@ import DashBoard from "./Dashboard"
 import Transaction from "./Transaction"
 import Goals from "./Goals"
 import Budget from "./Budget"
+import Wallet from "./Wallet"
+import Analytics from "./Analytics"
+import Setting from "./Setting"
 
 export default function SideBar() {
-    
-        const [dashboard, setdashboard] = useState(true)
+
+    const [dashboard, setdashboard] = useState(true);
 
     const [transaction, setTransaction] = useState(false)
-        
-        const [goals, setGoals] = useState(false)
-        const [budget, setbudget] = useState(false)
 
-        function handleDashboard(){
-            setdashboard(true)
-            setTransaction(false)
-            setGoals(false)
-            setbudget(false)
+    const [goals, setGoals] = useState(false);
 
-            if(dashboard){
-                return (
-                    <DashBoard />
-                )
-            }
+    const [budget, setbudget] = useState(false);
+
+    const [wallet, setwallet] = useState(false);
+    const [analytics, setanalytics] = useState(false);
+
+    const [setting, setSettings] = useState(false);
+
+    function handleDashboard() {
+        setdashboard(true)
+        setTransaction(false)
+        setGoals(false)
+        setbudget(false)
+        setwallet(false)
+        setanalytics(false)
+        setSettings(false)
+
+        if (dashboard) {
+            return (
+                <DashBoard />
+            )
         }
+    }
 
-    function handletransaction(){
+    function handletransaction() {
         setTransaction(true)
         setdashboard(false)
         setGoals(false)
-            setbudget(false)
-        if(transaction){
-            return(
+        setbudget(false)
+        setwallet(false)
+        setanalytics(false)
+        setSettings(false)
+
+        if (transaction) {
+            return (
                 <Transaction />
             )
         }
     }
 
-            function handleGoal(){
-            setdashboard(false)
-            setTransaction(false)
-            setGoals(true)
-            setbudget(false)
+    function handleGoal() {
+        setdashboard(false)
+        setTransaction(false)
+        setGoals(true)
+        setbudget(false)
+        setwallet(false)
+        setanalytics(false)
+        setSettings(false)
 
-            if(goals){
-                return (
-                    <Goals />
-                )
-            }
+        if (goals) {
+            return (
+                <Goals />
+            )
         }
+    }
 
-               function handleBudget(){
-            setdashboard(false)
-            setTransaction(false)
-            setGoals(false)
-            setbudget(true)
+    function handleBudget() {
+        setdashboard(false)
+        setTransaction(false)
+        setGoals(false)
+        setbudget(true)
+        setwallet(false)
+        setanalytics(false)
+        setSettings(false)
 
-            if(goals){
-                return (
-                    <Budget/>
-                )
-            }
+        if (budget) {
+            return (
+                <Budget />
+            )
         }
+    }
+
+
+    function handleWallet() {
+        setdashboard(false)
+        setTransaction(false)
+        setGoals(false)
+        setbudget(false)
+        setwallet(true)
+        setanalytics(false)
+        setSettings(false)
+
+        if (wallet) {
+            return (
+                <Wallet />
+            )
+        }
+    }
+
+    function handleAnalytics() {
+        setdashboard(false)
+        setTransaction(false)
+        setGoals(false)
+        setbudget(false)
+        setwallet(false)
+        setanalytics(true)
+        setSettings(false)
+
+        if (analytics) {
+            return (
+                <Analytics />
+            )
+        }
+    }
+
+    function handleSetting() {
+        setdashboard(false)
+        setTransaction(false)
+        setGoals(false)
+        setbudget(false)
+        setwallet(false)
+        setanalytics(false)
+        setSettings(true)
+
+        if (setting) {
+            return (
+                <Setting />
+            )
+        }
+    }
 
     return (
         <main className="flex min-h-screen w-screen bg-background p-1 ">
@@ -77,37 +148,46 @@ export default function SideBar() {
                     <i className="fa-solid fa-xmark text-text absolute top-0 right-0 hidden! max-[100px]:block "></i>
                 </div>
                 <div className="h-90 px-3">
-                    <div onClick={handleDashboard} style={dashboard ? ({backgroundColor: "#5935F5"}):({backgroundColor: "transparent"})} className="w-full flex items-center  h-12 rounded-2xl cursor-pointer mt-1 px-3 gap-5  transition-background ease duration-200 hover:bg-primary">
+                    <div onClick={handleDashboard} className={`w-full flex items-center gap-5 h-12 px-3 rounded-2xl cursor-pointer mt-2 transition-colors duration-500 hover:bg-primary ${dashboard ? "bg-[#5935F5]" : "bg-transparent"
+                            }`} >
                         <i className="fa-solid fa-house text-xl text-muted"></i>
                         <button className="text-muted font-medium text-lg cursor-pointer">Dashboard</button>
                     </div>
 
-                    <div onClick={handletransaction} style={transaction ? ({backgroundColor: "#5935F5"}):({backgroundColor: "transparent"})} className="w-full flex items-center gap-5 px-3 h-12 rounded-2xl cursor-pointer mt-2 transition-background ease duration-500 hover:bg-primary">
+                    <div onClick={handletransaction} className={`w-full flex items-center gap-5 h-12 px-3 rounded-2xl cursor-pointer mt-2 transition-colors duration-500 hover:bg-primary ${transaction ? "bg-[#5935F5]" : "bg-transparent"
+                            }`} >
                         <i className="fa-solid fa-money-bill-transfer text-xl text-muted"></i>
                         <button className="text-muted font-medium text-xl cursor-pointer" >Transactions</button>
                     </div>
 
-                    <div className="w-full flex items-center gap-5 h-12 px-3 rounded-2xl cursor-pointer mt-2 transition-background ease duration-500 hover:bg-primary">
+                    <div onClick={handleWallet} className={`w-full flex items-center gap-5 h-12 px-3 rounded-2xl cursor-pointer mt-2 transition-colors duration-500 hover:bg-primary ${wallet? "bg-[#5935F5]" : "bg-transparent"
+                            }`} >
                         <i className="fa-solid fa-bullseye text-xl text-muted"></i>
                         <button className="text-muted font-medium text-xl cursor-pointer">Wallet</button>
                     </div>
 
-                    <div onClick={handleGoal} style={goals ? ({backgroundColor: "#5935F5"}):({backgroundColor: "transparent"})} className="w-full flex items-center gap-5 h-12 px-3 rounded-2xl cursor-pointer mt-2 transition-background ease duration-500 hover:bg-primary">
+                    <div onClick={handleGoal} className={`w-full flex items-center gap-5 h-12 px-3 rounded-2xl cursor-pointer mt-2 transition-colors duration-500 hover:bg-primary ${goals ? "bg-[#5935F5]" : "bg-transparent"
+                            }`} >
                         <i className="fa-solid fa-bullseye text-xl text-muted"></i>
                         <button className="text-muted font-medium text-xl cursor-pointer">Goals</button>
                     </div>
 
-                    <div onClick={handleBudget} style={budget ? ({backgroundColor: "#5935F5"}):({backgroundColor: "transparent"})} className="w-full flex items-center gap-5 h-12 px-3 rounded-2xl cursor-pointer mt-2 transition-background ease duration-500 hover:bg-primary">
+                    <div onClick={handleBudget} className={`w-full flex items-center gap-5 h-12 px-3 rounded-2xl cursor-pointer mt-2 transition-colors duration-500 hover:bg-primary ${budget ? "bg-[#5935F5]" : "bg-transparent"
+                            }`} >
                         <i className="fa-solid fa-money-bill-transfer text-xl text-muted"></i>
                         <button className="text-muted font-medium text-xl cursor-pointer">Budget</button>
                     </div>
 
-                    <div className="w-full flex items-center gap-5 h-12 px-3 rounded-2xl cursor-pointer mt-2 transition-background ease duration-500 hover:bg-primary">
+                    <div onClick={handleAnalytics} className={`w-full flex items-center gap-5 h-12 px-3 rounded-2xl cursor-pointer mt-2 transition-colors duration-500 hover:bg-primary ${analytics ? "bg-[#5935F5]" : "bg-transparent"
+                            }`} >
                         <i className="fa-solid fa-chart-line text-xl text-muted"></i>
-                        <button className="text-muted font-medium text-xl cursor-pointer">Analytics</button>
+                        <button className="text-muted font-medium text-xl cursor-pointer">
+                            Analytics
+                        </button>
                     </div>
 
-                    <div className="w-full flex items-center gap-5 h-12 px-3 rounded-2xl cursor-pointer mt-2 transition-background ease duration-500 hover:bg-primary">
+                    <div onClick={handleSetting} className={`w-full flex items-center gap-5 h-12 px-3 rounded-2xl cursor-pointer mt-2 transition-colors duration-500 hover:bg-primary ${setting ? "bg-[#5935F5]" : "bg-transparent"
+                            }`} >
                         <i className="fa-solid fa-gear text-xl text-muted"></i>
                         <button className="text-muted font-medium text-xl cursor-pointer">Setting</button>
                     </div>
@@ -121,7 +201,7 @@ export default function SideBar() {
 
             </aside>
 
-            {dashboard ? (<DashBoard />) : transaction ?(<Transaction />) : goals ? (<Goals />) : budget ? (<Budget />) : null}
+            {dashboard ? (<DashBoard />) : transaction ? (<Transaction />) : goals ? (<Goals />) : budget ? (<Budget />) : wallet ? (<Wallet />) : analytics ? (<Analytics />) : setting ? (<Setting />) : null}
         </main >
     )
 }

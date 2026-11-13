@@ -17,7 +17,7 @@ export default function Budget() {
 
                     <div className="flex h-50 w-[35%] gap-3 items-center bg-sidebar rounded-xl justify-center">
                         <div className="w-[50%] h-full flex items-center justify-center">
-                            <div className="flex items-center justify-center h-40 border-3 w-40 rounded-full bg-[conic-gradient(red,yellow,blue,yellow)]">
+                            <div className="flex items-center justify-center h-40 w-40 rounded-full bg-[conic-gradient(red,yellow,blue,yellow)]">
                                 <div className="h-30 w-30 rounded-full bg-surface flex items-center justify-center flex-col">
                                     <h2 className="text-text font-semibold text-2xl">70%</h2>
                                     <small className="text-muted text-md">Used</small>
